@@ -1,3 +1,1 @@
-# Ignore plugin lockfiles and compiled stuff
 lazy-lock.json
-plugin/packer_compiled.lua
