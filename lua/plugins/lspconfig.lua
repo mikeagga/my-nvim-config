@@ -10,6 +10,7 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup {
         ensure_installed = {
+          "lua_ls",            -- Lua (for Neovim config)
           "marksman",          -- Markdown / Quarto
           "pyright",           -- Python
           "r_language_server", -- R
@@ -38,6 +39,26 @@ return {
       }
 
       -- Servers
+      lspconfig.lua_ls.setup {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        },
+      }
       lspconfig.marksman.setup { capabilities = capabilities }
       lspconfig.pyright.setup { capabilities = capabilities }
       lspconfig.r_language_server.setup { capabilities = capabilities }
